@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Script for Nas4Free to use ssh-keygen keys
+# for secure logins with SSH
+#
+# Root Logon Script:
+#               WARNING:..SYSTEM -> SERVICES -> SSH MUST HAVE LOGIN AS ROOT DIRECTLY CHECKED
+#               WARNING:..THIS ISN'T SOMETHING YOU ALWAYS WANT ENABLED - TESTING OR LOCAL ONLY
+#
+USER="root"
+KEYDIR="/mnt/zpool1/Data/scripts/ssh_keys/"
+#----------------------------------------------
+mkdir -p -m 711 /root/.ssh
+cp -p $KEYDIR/authorized_keys /root/.ssh
+chown $USER:wheel /root/.ssh/authorized_keys
+#
+#
+USER="jan"
+#----------------------------------------------
+mkdir -p -m 711 /mnt/.ssh
+cp -p $KEYDIR/authorized_keys /mnt/.ssh
+chown $USER:wheel /mnt/.ssh/authorized_keys
