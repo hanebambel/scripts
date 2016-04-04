@@ -1,0 +1,4 @@
+#!/bin/sh
+sudo cp "/Library/Application Support/CrashPlan/.ui_info_remote" "/Library/Application Support/CrashPlan/.ui_info"
+open /Applications/CrashPlan.app
+ssh -L 4200:localhost:4243 root@192.168.2.11
