@@ -1,0 +1,11 @@
+#!/bin/sh
+# Backup Script for my home folder
+# 2016-03-27: JG
+SERVER="elstar.local"
+if ping -c 1 $SERVER; then
+    echo "server live, starting sync..."
+#	rsync -avz --info=progress2 --delete /Users/jangabor/ jan@192.168.2.10:/mnt/zpoo1/Mirror/
+    rsync -az --info=progress2 --delete /Users/jangabor/ jan@$SERVER::HomeMirror
+else
+    echo "server down"
+fi 
