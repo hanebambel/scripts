@@ -19,6 +19,7 @@
 
 log="/mnt/zpool1/Data/tmp/log/idle.log"
 stats_file="/mnt/zpool1/Data/tmp/log/nas_stats.log"
+csv_file="/mnt/zpool1/Data/tmp/log/network.csv"
 # Find out if it s embedded or full install
 if [[ $(grep embedded /etc/platform) ]]; then
     config="/cf/conf/config.xml"  # For embedded installs
@@ -103,6 +104,9 @@ if [[ -f $stats_file ]]; then
 
 	echo "Threshold Values" >> $log
 	echo -e "t_rx: $t_rx t_tx: $t_tx\n" >> $log
+    
+    # Write csv-file
+    echo -e "$(date);$rx;$tx\n" >> $csv_file
 
 	if [[ $rx -le $t_rx ]] && [[ $tx -le $t_tx ]]; then  ## If network packets have not changed that much
 		echo " " >> $log
