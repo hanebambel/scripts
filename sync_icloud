@@ -1,0 +1,10 @@
+#!/bin/sh
+# Backup Script for my icloud drive
+# 2021-01-10: JG
+SERVER="elstar.local"
+if ping -c 1 $SERVER; then
+    echo "server live, starting sync..."
+    rsync -a -zz --info=progress2  "../Library/Mobile Documents/com~apple~CloudDocs/" jan@$SERVER::icloudMirror
+else
+    echo "server down"
+fi 
