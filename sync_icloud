@@ -2,9 +2,16 @@
 # Backup Script for my icloud drive
 # 2021-01-10: JG
 SERVER="elstar.local"
+ICLOUD_PATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+
+./start_elstar
+
 if ping -c 1 $SERVER; then
     echo "server live, starting sync..."
-    rsync -a -zz --info=progress2  "../Library/Mobile Documents/com~apple~CloudDocs/" jan@$SERVER::icloudMirror
+    echo "materializing iCloud Drive Data..."
+    fileproviderctl materialize "$ICLOUD_PATH" &> /dev/null
+    echo "starting rsync..."
+    rsync -a -zz --info=progress2 "$ICLOUD_PATH" jan@$SERVER::icloudMirror
 else
     echo "server down"
 fi 

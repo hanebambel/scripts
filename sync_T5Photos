@@ -2,9 +2,11 @@
 # Backup Script for my Photos SSD
 # 2016-03-27: JG
 SERVER="elstar.local"
+
+./start_elstar
+
 if ping -c 1 $SERVER; then
     echo "server live, starting sync..."
-#	rsync -avz --info=progress2 --delete /Users/jangabor/ jan@192.168.2.10:/mnt/zpoo1/Mirror/
     rsync -az --info=progress2 --delete /Volumes/T5Photos/ jan@$SERVER::T5PhotosMirror
 else
     echo "server down"

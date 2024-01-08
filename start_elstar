@@ -1,0 +1,32 @@
+#!/bin/zsh
+
+# Server information
+SERVER="elstar.local"
+SERVER_MAC="38:EA:A7:A6:02:08"
+BROADCAST_IP="192.168.2.255"
+
+# try count
+TRIES=0
+
+# max tries (30sec / try)
+MAX_TRIES=20
+
+wakeonlan -i $BROADCAST_IP $SERVER_MAC
+
+while (( TRIES < MAX_TRIES ))
+do
+  # Try to ping
+  if ping -c 1 $SERVER &> /dev/null
+  then
+    echo "Server $SERVER online"
+    exit 0
+  fi
+
+  # if not reachable, wait 30 secs
+  echo "Server $SERVER is not reachable, try again in 30 seconds"
+  sleep 30
+  (( TRIES++ ))
+done
+
+echo "Server $SERVER not reachable after 10 minutes, stopping..."
+exit 1
