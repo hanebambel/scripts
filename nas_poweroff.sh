@@ -20,19 +20,21 @@
 log="/mnt/zpool1/Data/tmp/log/idle.log"
 stats_file="/mnt/zpool1/Data/tmp/log/nas_stats.log"
 csv_file="/mnt/zpool1/Data/tmp/log/network.csv"
+
 # Find out if it s embedded or full install
-if [[ $(grep embedded /etc/platform) ]]; then
-    config="/cf/conf/config.xml"  # For embedded installs
-    # Add a test to remount /cf if there is problems
-    if [[ ! -f $config ]]; then 
-        umount /cf && mount /cf
-    fi
-else
-    config="/conf/config.xml"  # For full installs
-fi
+#if [[ $(grep embedded /etc/platform) ]]; then
+#    config="/cf/conf/config.xml"  # For embedded installs
+#    # Add a test to remount /cf if there is problems
+#    if [[ ! -f $config ]]; then 
+#        umount /cf && mount /cf
+#    fi
+#else
+#    config="/conf/config.xml"  # For full installs
+#fi
 
 ## Find the LAN interface
-ip=$(/usr/local/bin/xml sel -t -v "//interfaces/lan/ipaddr" $config)
+#ip=$(/usr/local/bin/xml sel -t -v "//interfaces/lan/ipaddr" $config)
+ip="192.168.2.10"
 interface=$(netstat -in|grep $ip|awk '{print $1}')
 
 if [[ -z $ip || -z $interface || -z $config ]]; then
@@ -41,9 +43,9 @@ if [[ -z $ip || -z $interface || -z $config ]]; then
 fi
 
 ## Only works if smartd has a valid email set in SMART
-email_to=$(/usr/local/bin/xml sel -t -v "//smartd/email/to" $config)
-email_from=$(/usr/local/bin/xml sel -t -v "//email/from" $config)
-subject="$(hostname -s) - Shutdown - $(date +%H:%M\ %Y-%m-%d)"
+#email_to=$(/usr/local/bin/xml sel -t -v "//smartd/email/to" $config)
+#email_from=$(/usr/local/bin/xml sel -t -v "//email/from" $config)
+#subject="$(hostname -s) - Shutdown - $(date +%H:%M\ %Y-%m-%d)"
 
 sleep_packets="$1"
 
