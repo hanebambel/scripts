@@ -16,7 +16,7 @@ if [ -f "/usr/local/bin/wakeonlan" ]; then
 elif [ -f "/opt/homebrew/bin/wakeonlan" ]; then
   /opt/homebrew/bin/wakeonlan -i $BROADCAST_IP $SERVER_MAC
 else 
-  echo "wakonlan executable not found, exiting..."
+  echo "wakeonlan executable not found, exiting..."
   exit 1
 fi
 
