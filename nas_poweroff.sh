@@ -37,7 +37,7 @@ csv_file="/mnt/zpool1/Data/tmp/log/network.csv"
 ip="192.168.2.10"
 interface=$(netstat -in|grep $ip|awk '{print $1}')
 
-if [[ -z $ip || -z $interface || -z $config ]]; then
+if [[ -z $ip || -z $interface ]]; then
     echo "Could not determine ip: $ip or interface: $interface or could not find the config file: $config"
     exit 1
 fi
@@ -59,13 +59,13 @@ if [[ -z "$1" ]]; then
 	exit 1
 fi
 hibernate="n"; email="n"
-for ARG in "$@"
-      do
-       case $ARG in
-            "-e" ) email="y";;
-            "-h" ) hibernate="y";;
-       esac
-done
+#for ARG in "$@"
+#      do
+#       case $ARG in
+#            "-e" ) email="y";;
+#            "-h" ) hibernate="y";;
+#       esac
+#done
 }
 
 process_args "$@"
