@@ -11,7 +11,7 @@ TRIES=0
 # max tries (30sec / try)
 MAX_TRIES=20
 
-wakeonlan -i $BROADCAST_IP $SERVER_MAC
+/usr/local/bin/wakeonlan -i $BROADCAST_IP $SERVER_MAC
 
 while (( TRIES < MAX_TRIES ))
 do
