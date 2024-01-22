@@ -86,7 +86,7 @@ if [[ $(zpool status|grep "in progress") ]]; then
 fi
 
 # Check if MacBook is connected
-if [[ $(netstat|grep -e "Jans-MBP" -e "MacBookM1Pro") ]]; then
+if [[ $(netstat|grep -e "Jans-MBP" -e "MacBookProM3Max") ]]; then
         connected=1
     else
         connected=0
